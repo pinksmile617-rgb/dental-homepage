@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>서울수락치과의원 | 편안하게 찾아오는 동네 치과</title>
+  <style>
+    :root {
+      --ink: #1f2a2e;
+      --muted: #5b6b70;
+      --surface: #fbfaf7;
+      --card: #ffffff;
+      --accent: #2f6f6a;
+      --accent-soft: #e4efed;
+      --line: #e3e0d8;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--surface);
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+    a { color: var(--accent); }
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+    section { padding: 72px 0; }
+    h1, h2, h3 { line-height: 1.3; margin: 0 0 12px; }
+    h2 { font-size: 28px; }
+    .eyebrow { color: var(--accent); font-weight: 700; font-size: 14px; letter-spacing: .04em; }
+    .lead { color: var(--muted); font-size: 17px; }
+
+    /* 맨 위 메뉴 줄 */
+    .topbar {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(251,250,247,.94);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 12px; }
+    .brand { font-weight: 800; font-size: 18px; text-decoration: none; color: var(--ink); }
+    .menu { display: flex; gap: 2px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+    .menu::-webkit-scrollbar { display: none; }
+    .menu a {
+      display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px;
+      color: var(--ink); text-decoration: none; font-size: 15px; border-radius: 8px;
+      white-space: nowrap; flex-shrink: 0;
+      transition: background .2s;
+    }
+    .menu a:hover { background: var(--accent-soft); }
+    .tel-top { color: var(--accent); font-weight: 700; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+
+    /* 첫 화면 */
+    .hero { padding: 88px 0 80px; background: linear-gradient(180deg, var(--surface), var(--accent-soft)); }
+    .hero h1 { font-size: clamp(32px, 5vw, 52px); letter-spacing: -.01em; }
+    .hero { position: relative; overflow: hidden; }
+    .hero .wrap { position: relative; z-index: 1; }
+    .univ-mark { position: absolute; right: 4%; top: 0; transform: none; z-index: 0; pointer-events: none; display: flex; align-items: center; justify-content: center; width: min(180px, 40vw); height: 120px; border: 2px dashed #9aa0a6; border-radius: 24px; background: transparent; color: #9aa0a6; opacity: .18; font-size: 18px; text-align: center; }
+    .hero p { max-width: 560px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; padding: 0 22px; margin: 8px 8px 0 0;
+      border-radius: 999px; font-weight: 700; text-decoration: none;
+      cursor: pointer; transition: transform .2s, background .2s;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { transform: translateY(-1px); background: #275c58; }
+    .btn-ghost { border: 1.5px solid var(--accent); color: var(--accent); background: transparent; }
+    .btn-ghost:hover { background: var(--accent-soft); }
+
+    .glance {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+      margin-top: 40px; background: var(--card); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 24px;
+    }
+    .glance-label { margin: 0 0 4px; color: var(--muted); font-size: 15px; font-weight: 700; }
+    .glance-value { margin: 0; font-size: 19px; font-weight: 700; line-height: 1.5; }
+    .tel { color: var(--accent); text-decoration: none; }
+    @media (max-width: 760px) { .glance { grid-template-columns: 1fr; } }
+
+    .faq-list { margin-top: 24px; display: grid; gap: 12px; }
+    .faq-list details { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 20px; }
+    .faq-list summary { cursor: pointer; font-weight: 700; font-size: 17px; min-height: 44px; display: flex; align-items: center; }
+    .faq-list details p { color: var(--muted); margin: 8px 0 0; font-size: 15px; }
+
+    /* 병원 소개 */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+    .photo-ph {
+      aspect-ratio: 4 / 3; border-radius: var(--radius);
+      background: repeating-linear-gradient(45deg, #ece9e2, #ece9e2 12px, #e4e0d6 12px, #e4e0d6 24px);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 14px;
+    }
+    .points { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 12px; }
+    .points li { display: flex; gap: 10px; align-items: flex-start; }
+    .points svg { flex: 0 0 22px; width: 22px; height: 22px; color: var(--accent); margin-top: 2px; }
+
+    /* 진료 안내 */
+    .treat-bg { background: var(--card); }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 24px;
+    }
+    .card .icon { width: 40px; height: 40px; color: var(--accent); margin-bottom: 14px; }
+    .card h3 { font-size: 19px; }
+    .card p { color: var(--muted); margin: 0; font-size: 15px; }
+
+    /* 오시는 길 */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+    .info-box { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+    .info-box h3 { font-size: 18px; }
+    .hours { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .hours td { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+    .hours td:last-child { text-align: right; color: var(--muted); }
+    .map-ph {
+      margin-top: 16px; border-radius: 10px; min-height: 180px;
+      background: #e9ecea; display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 14px; text-align: center; padding: 16px;
+    }
+
+    /* 맨 아래 정보 */
+    footer { background: var(--ink); color: #d9e2e0; padding: 40px 0; font-size: 14px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+    footer a { color: #fff; }
+
+    /* 움직임 줄이기 설정 존중 */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+
+    /* 휴대폰 */
+    @media (max-width: 760px) {
+      section { padding: 56px 0; }
+      .topbar .wrap { flex-direction: column; align-items: flex-start; padding: 8px 20px; }
+      .about-grid, .info-grid { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr; }
+      .hero { padding: 64px 0 56px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="#top">서울수락치과의원</a>
+      <nav class="menu" aria-label="주요 메뉴">
+        <a href="#about">병원 소개</a>
+        <a href="#doctors">의료진</a>
+        <a href="#treatment">진료내용</a>
+        <a href="#hours">진료시간</a>
+        <a href="#visit">오시는길</a>
+        <a href="#board">게시판</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- 첫 화면 -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="univ-mark" aria-label="서울대 마크 자리">서울대 마크 자리</div>
+        <p class="eyebrow">동네 주민이 편하게 찾는 치과</p>
+        <h1>편안하게, 오래 웃을 수 있도록<br>서울수락치과의원이 함께합니다</h1>
+        <p class="lead">검진부터 치료 후 관리까지, 한 분 한 분 설명드리고 천천히 진행합니다.</p>
+        <a class="btn btn-primary" href="#visit">오시는 길 보기</a>
+        <a class="btn btn-ghost" href="#treatment">진료 안내 보기</a>
+
+        <div class="glance">
+          <div>
+            <p class="glance-label">전화</p>
+            <!-- 여기고치기: 전화 -->
+            <p class="glance-value"><a class="tel" data-phone>02-931-2777</a></p>
+          </div>
+          <div>
+            <p class="glance-label">진료시간</p>
+            <!-- 여기고치기: 진료시간 -->
+            <p class="glance-value">월~금 09:30~18:00<br>토요일 09:00~13:00</p>
+          </div>
+          <div>
+            <p class="glance-label">위치</p>
+            <p class="glance-value">서울특별시 노원구 동일로 1598 부흥빌딩 202호</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 병원 소개 -->
+    <section id="about">
+      <div class="wrap about-grid">
+        <div>
+          <p class="eyebrow">병원 소개</p>
+          <h2>서울대 대표원장님이 직접 하는 임플란트·교정 진료</h2>
+          <p class="lead">환자분의 91% 이상이 다른 사람에게 우리 치과를 소개했습니다.</p>
+          <ul class="points">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>치료 전 과정과 예상 비용을 미리 안내드립니다</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>아이와 어르신 모두 편하게 오실 수 있는 진료실</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>꼼꼼한 위생 관리와 깨끗한 진료 환경</span>
+            </li>
+          </ul>
+        </div>
+        <div class="photo-ph" role="img" aria-label="병원 사진 자리 (준비 전)">병원 사진 자리</div>
+      </div>
+    </section>
+
+    <!-- 의료진 -->
+    <section id="doctors">
+      <div class="wrap">
+        <p class="eyebrow">의료진</p>
+        <h2>함께하는 의료진</h2>
+        <p class="lead">의료진 소개는 준비되는 대로 채워 넣겠습니다.</p>
+        <img src="images/그림01.png" alt="의료진 사진" style="max-width:100%;height:auto;border-radius:12px;margin-top:16px;">
+      </div>
+    </section>
+
+    <!-- 진료 안내 -->
+    <section id="treatment" class="treat-bg">
+      <div class="wrap">
+        <p class="eyebrow">진료 안내</p>
+        <h2>자주 찾으시는 진료</h2>
+        <p class="lead">증상과 상황에 맞춰 필요한 치료만 권해 드립니다.</p>
+        <div class="cards">
+          <article class="card">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+            <h3>임플란트</h3>
+            <p>임플란트 재수술 전문</p>
+          </article>
+          <article class="card">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v18M3 12h18"/></svg>
+            <h3>교정</h3>
+            <p>소아 및 성인 교정</p>
+          </article>
+          <article class="card">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h16M12 4v16"/></svg>
+            <h3>사랑니 발치 및 소수술</h3>
+            <p>사랑니 발치 및 소수술</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 진료시간 -->
+    <section id="hours" class="treat-bg">
+      <div class="wrap">
+        <p class="eyebrow">진료시간</p>
+        <h2>진료 시간 안내</h2>
+        <p class="lead">아래 시간을 참고해 방문 일정을 잡아 주세요.</p>
+      </div>
+    </section>
+
+    <!-- 오시는 길 -->
+    <section id="visit">
+      <div class="wrap">
+        <p class="eyebrow">오시는 길</p>
+        <h2>찾아오시는 길과 진료 시간</h2>
+        <div class="info-grid">
+          <div class="info-box">
+            <h3>진료 시간</h3>
+            <!-- 여기고치기: 진료시간 -->
+            <table class="hours">
+              <tr><td>월·화·수·목·금</td><td>09:30~18:00</td></tr>
+              <tr><td>토요일</td><td>09:00~13:00</td></tr>
+              <tr><td>일요일·공휴일</td><td>휴진</td></tr>
+            </table>
+            <!-- 여기고치기: 점심시간 -->
+            <p class="lead" style="margin:14px 0 0;font-size:15px">점심시간 13:00~14:00 (진료 없음)</p>
+          </div>
+          <div class="info-box">
+            <h3>주소와 연락처</h3>
+            <p style="margin:8px 0">서울특별시 노원구 동일로 1598 부흥빌딩 202호</p>
+            <!-- 여기고치기: 전화 -->
+            <p style="margin:8px 0">전화 <a class="tel" data-phone>02-931-2777</a></p>
+            <div class="map" style="margin:12px 0 0">
+              <iframe
+                src="https://maps.google.com/maps?q=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EB%85%B8%EC%9B%90%EA%B5%AC%20%EB%8F%99%EC%9D%BC%EB%A1%9C%201598%20%EB%B6%80%ED%9D%A5%EB%B9%8C%EB%94%A9&output=embed"
+                title="서울수락치과의원 위치 지도"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                style="width:100%;height:260px;border:0"></iframe>
+              <p style="margin:8px 0 0"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EB%85%B8%EC%9B%90%EA%B5%AC%20%EB%8F%99%EC%9D%BC%EB%A1%9C%201598%20%EB%B6%80%ED%9D%A5%EB%B9%8C%EB%94%A9" target="_blank" rel="noopener">구글 지도에서 길찾기</a></p>
+            </div>
+            <p style="margin:8px 0 0"><a class="map-link" href="https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EB%85%B8%EC%9B%90%EA%B5%AC%20%EB%8F%99%EC%9D%BC%EB%A1%9C%201598" target="_blank" rel="noopener">네이버 지도에서 보기</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 게시판 -->
+    <section id="board" class="treat-bg">
+      <div class="wrap">
+        <p class="eyebrow">게시판</p>
+        <h2>공지와 소식</h2>
+        <p class="lead">새로운 소식은 이곳에 올려 드리겠습니다.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>
+        <strong>서울수락치과의원</strong><br>
+        서울특별시 노원구 동일로 1598 부흥빌딩 202호
+      </div>
+      <div>
+        진료 문의 <a class="tel" data-phone>02-931-2777</a><br>
+        © 서울수락치과의원. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- 화면의 전화번호만 고치면 누를 때 거는 번호도 같이 바뀝니다 -->
+  <script>document.querySelectorAll("a[data-phone]").forEach(a => a.href = "tel:" + a.textContent.replace(/[^0-9]/g, ""));</script>
+</body>
+</html>
